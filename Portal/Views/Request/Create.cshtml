@@ -1,0 +1,482 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using System.Net.Mime
+
+@model Portal.Models.Customer
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div style="width: 0; height: 115px;"></div>
+
+<div id="step1Div" style="background: url('/content/Images/Step_1.png') no-repeat;  margin:0 auto; padding-top: 74px; width: 318px; ">
+    
+</div>
+<div id="backgroundDiv" style="background-color: #CEF6F5; width: 700px; height: 580px; margin:0 auto; margin-top: 20px;">
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div style="float: left; margin-top: 10px;">
+            <img src="/Content/Images/Step_1Number.png" height="30" width="30" />
+              
+        </div>
+        <legend style="float: left; margin-left: 5px; margin-top: 15px">Your Details</legend>
+
+
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Title):</div>
+            <div class="field_right">
+                <div >
+                    @Html.DropDownListFor(model => model.Titles, Model.Items)
+                </div>
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">First name:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.FirstName)
+                <br/>
+              
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Surname:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Surname)
+             @*   @Html.ValidationMessageFor(model => model.Surname)*@
+            </div>
+        </div>
+        
+        <div id="lookupPane" class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Enter Postcode:</div>
+            <div class="field_right" id="addressLookupPane">
+                @Html.TextBox("LookupPostcode")
+            <input style="margin-left: 135px;" id="lookupAddressButton" type="button" value="Lookup Address"/>     
+            </div>
+           
+        </div>
+        
+
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Address Line 1:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Address1)
+                @*@Html.ValidationMessageFor(model => model.Address1)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Address Line 2:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Address2)
+                @*@Html.ValidationMessageFor(model => model.Address1)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Address Line 3:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Address3)
+                @*@Html.ValidationMessageFor(model => model.Address2)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Town/City:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Town)
+                @*@Html.ValidationMessageFor(model => model.Town)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">County:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.County)
+                @*@Html.ValidationMessageFor(model => model.County)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Postcode:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.PostCode)
+                @*@Html.ValidationMessageFor(model => model.PostCode)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Email):</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Email)
+                @*@Html.ValidationMessageFor(model => model.Email)*@
+            </div>
+        </div>
+          <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Confirm email:</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.ConfirmEmail)
+                @Html.ValidationMessageFor(model => model.ConfirmEmail)
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Phone number:</div>
+            <div class="field_right">
+                @Html.TextBoxFor(model=> model.TelePhoneNumber)
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Date of birth:</div>
+            <div id="dobDiv" class="field_right">
+                  @Html.EditorFor(model => model.DateOfBirth)
+                <div  style="float: left;">
+                      @Html.ValidationMessageFor(model => model.DateOfBirth)
+                </div>
+              
+            </div>
+        </div>
+         <div  class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Please choose your gender</div>
+             <div id="genderDiv" class="field_right_Create">
+                 Not specified: @Html.CheckBoxFor(model => model.GenderNotSpecified, true)
+                 Male: 
+                 @Html.CheckBoxFor(model => model.Male, string.Empty)
+                 Female: 
+                 @Html.CheckBoxFor(model => model.Female,string.Empty)
+             </div>
+        </div>
+    </fieldset>
+    <div id="buttonsDiv">
+        <input type="button" id="backButton" value="Cancel" 
+               style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: left; margin-left: 2px;"   
+               onclick="location.href='@Url.Action("Index", "Request")'" />
+        @*  <input type="button" id="createButton" value="Continue"/>*@
+        <input type="submit" id="submitButton" value="Create" 
+               style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: right; margin-right: 2px;"
+            />                    
+    
+    </div>
+}
+    
+   
+    @section Scripts {
+        @*@Scripts.Render("~/bundles/jqueryval")*@
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var domain = document.domain;
+                $('#genderDiv').css('border-color', '#cef6f5');
+                var h = $('#backgroundDiv').height();
+                var count;
+
+                if (count > 0) {
+                    for (i = 0; i < count; i++) {
+                        h -= 11;
+                    }
+                    $('#backgroundDiv').css('height', h);
+                    count = 0;
+                }
+
+                if ($('.field-validation-error').length > 0) {
+                    count = $('.field-validation-error').length;
+                    for (i = 0; i < $('.field-validation-error').length; i++) {
+                        h += 11;
+                    }
+                    $('#backgroundDiv').css('height', h);
+                }
+
+                if ($('#TelePhoneNumber').val() == "") {
+                    $('#TelePhoneNumber').css('color', '#808080');
+                    $('#TelePhoneNumber').val("Example 01472 588999, 01472588999 mobile 07746 952480 07746952480");
+                    $('#LookupPostcode').val("Please enter your postcode to search for you address");
+                    $('#LookupPostcode').css('color', '#808080');
+                    $('#FirstName').val("Mandatory");
+                    $('#FirstName').css('color', '#808080');
+                    $('#Surname').val("Mandatory");
+                    $('#Surname').css('color', '#808080');
+                    $('#Address1').val("Mandatory");
+                    $('#Address1').css('color', '#808080');
+                    $('#Town').val("Mandatory");
+                    $('#Town').css('color', '#808080');
+                    $('#County').val("Mandatory");
+                    $('#County').css('color', '#808080');
+                    $('#PostCode').val("Mandatory");
+                    $('#PostCode').css('color', '#808080');
+                }
+            });
+
+            $('#submitButton').click(function(e) {
+
+                
+
+                if ($('#FirstName').val() == "Mandatory") {
+                    e.preventDefault();
+                    $('#FirstName').addClass('input-validation-error');
+                    alert("All fields marked as mandatory must be filled in.");
+                    return false;
+                }
+
+                if ($('#Surname').val() == "Mandatory") {
+                    e.preventDefault();
+                    $('#Surname').addClass('input-validation-error');
+                    alert("All fields marked as mandatory must be filled in.");
+                    return false;
+
+                }
+
+                if ($('#Address1').val() == "Mandatory") {
+                    e.preventDefault();
+                    $('#Address1').addClass('input-validation-error');
+                    alert("All fields marked as mandatory must be filled in.");
+                    return false;
+                }
+
+                if ($('#Town').val() == "Mandatory") {
+                    e.preventDefault();
+                    $('#Town').addClass('input-validation-error');
+                    alert("All fields marked as mandatory must be filled in.");
+                    return false;
+                }
+
+                if ($('#Postcode').val() == "Mandatory") {
+                    e.preventDefault();
+                    $('#Postcode').addClass('input-validation-error');
+                    alert("All fields marked as mandatory must be filled in.");
+                    return false;
+
+                }
+                    
+                else {
+                    $('#FirstName').removeClass('input-validation-error');
+                    $('#Surname').removeClass('input-validation-error');
+                    $('#Address1').removeClass('input-validation-error');
+                    $('#Town').removeClass('input-validation-error');
+                    $('#Postcode').removeClass('input-validation-error');
+                }
+            });
+            /*input-validation-error*/
+            $('#FirstName').click(function() {
+                if ($(this).val() == 'Mandatory') {
+                    $('#FirstName').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#FirstName').blur(function() {
+                if ($('#FirstName').val() != "Mandatory") {
+                    $('#FirstName').removeClass('input-validation-error');
+                }
+            });
+
+            $('#Surname').click(function() {
+                if ($(this).val() == 'Mandatory') {
+                    $('#Surname').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#Surname').blur(function() {
+                if ($('#Surname').val() != "Mandatory") {
+                    $('#Surname').removeClass('input-validation-error');
+                }
+            });
+
+            $('#Address1').click(function() {
+                if ($(this).val() == 'Mandatory') {
+                    $('#Address1').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#Address1').blur(function() {
+                if ($('#Address1').val() != "Mandatory") {
+                    $('#Address1').removeClass('input-validation-error');
+                }
+            });
+
+            $('#Town').click(function() {
+                if ($(this).val() == 'Mandatory') {
+                    $('#Town').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#Town').blur(function() {
+                if ($('#Town').val() != "Mandatory") {
+                    $('#Town').removeClass('input-validation-error');
+                }
+            });
+
+            $('#County').click(function() {
+                if ($(this).val() == 'Mandatory') {
+                    $('#County').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#County').blur(function() {
+                if ($('#County').val() != "Mandatory") {
+                    $('#County').removeClass('input-validation-error');
+                }
+            });
+
+            $('#PostCode').click(function() {
+                if ($(this).val() == 'Mandatory') {
+                    $('#PostCode').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#PostCode').blur(function() {
+                $.post("/Request/IsValidPostcode", { value: $('#PostCode').val() },
+                    function(result) {
+                        if (result == false) {
+                         
+                            $('#PostCode').val("Mandatory");
+                            alert("This is not a valid postcode.");
+                            
+                        }
+                        return false;
+                    }
+                );
+
+                if ($('#PostCode').val() != "Mandatory") {
+                    $('#PostCode').removeClass('input-validation-error');
+                }
+            });
+            
+            $('#Email').blur(function() {
+                $.post("/Request/IsValidEmail", { value: $('#Email').val() },
+                    function(result) {
+                        if (result == false) {
+
+                            $('#Email').val("");
+                            alert("This is not a valid email address.");
+
+                        }
+                        return false;
+                    });
+            });
+            
+            //$('#ConfirmEmail').blur(function() {
+            //    $.post("/Request/CompareEmail", { value: $('#Email').val(), Confirmemail: $('#ConfirmEmail').val() },
+            //        function(result) {
+            //            if (result == false) {
+            //                alert("This email addresses do not match.");
+            //            }
+            //            return false;
+            //        });
+            //});
+
+            $('#TelePhoneNumber').click(function() {
+                if ($(this).val() == 'Example 01472 588999, 01472588999 mobile 07746 952480 07746952480') {
+                    $('#TelePhoneNumber').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#LookupPostcode').click(function() {
+                if ($(this).val() == 'Please enter your postcode to search for you address') {
+                    $('#LookupPostcode').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+            
+            $(function() {
+                var date = new Date;
+                if ($.browser.chrome) {
+                    if (!Modernizr.inputtypes.date) {
+                        $('#dobDiv').css('width', '135px');
+                        $('DateOfBirth').datepicker({
+                            defaultDate: date,
+                            changeMonth: true,
+                            changeYear: true,
+                            showAnim: 'clip',
+                            dateFormat: 'dd/mm/yy',
+                            yearRange: "-100:+0",
+                            width: 135
+                        });
+                    }
+                } else {
+
+                    $("#DateOfBirth").datepicker({
+                        defaultDate: date,
+                        changeMonth: true,
+                        changeYear: true,
+                        showAnim: 'clip',
+                        dateFormat: 'dd/mm/yy',
+                        yearRange: "-100:+0"
+                    });
+                }
+            });
+            
+
+            $('#GenderNotSpecified').click(function() {
+                if ($(this).is(':checked')) {
+                    $('#Male').attr('checked', false);
+                    $('#Female').attr('checked', false);
+                }
+            });
+
+            $('#Male').click(function() {
+                $('#GenderNotSpecified').attr('checked', false);
+                $('#Female').attr('checked', false);
+            });
+
+            $('#Female').click(function() {
+                $('#GenderNotSpecified').attr('checked', false);
+                $('#Male').attr('checked', false);
+            });
+
+            $('#lookupAddressButton').click(function(e) {
+                e.preventDefault();
+                var regPostcode = /^[a-zA-Z]{1,2}[\d]{1,2}[a-zA-Z]?\s?\d[a-zA-Z]{2}$/;
+                if (regPostcode.test($('#LookupPostcode').val()) == true) {
+                    $.post("/Request/LookupAddresses", { postcode: $('#LookupPostcode').val() },
+                        function(addresses) {
+                            if (addresses != null) {
+                                var s = $('<select id="addresslist" style="margin-left:135px; width: 71%; margin-top:5px;"/>');
+                                $('<option />', { text: 'Please select address', value: '' }).appendTo(s);
+
+                                for (var address in addresses) {
+                                    $('<option />', { text: addresses[address].replace(',', ', '), value: address }).appendTo(s);
+                                }
+                                s.appendTo('#addressLookupPane');
+                                $('#addresslist').change(function() {
+                                    if ($('#addresslist').val() != '') {
+                                        $.post("/Request/LookupAddresses", { postcode: $('#addresslist').val() },
+                                            function(singleAddress) {
+                                                $('#Address1').val(singleAddress.AddressLine1);
+                                                $('#Address2').val(singleAddress.AddressLine2);
+                                                $('#Address3').val(singleAddress.AddressLine3);
+                                                $('#Town').val(singleAddress.TownOrCity);
+                                                $('#County').val(singleAddress.County);
+                                                $('#PostCode').val($('#LookupPostcode').val().toUpperCase());
+                                                $('#lookupPane').remove();
+                                                $('#backgroundDiv').css('height', '515px');
+                                            });
+                                    }
+                                });
+                            } else {
+                                alert("No addresses found.");
+                            }
+                        });
+                } else {
+                    alert("Please enter a valid postcode.");
+                }
+            });
+
+
+        </script>
+    }
+
+    </div>

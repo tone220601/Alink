@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="LookupAddresses">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="postcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="houseNumberOrName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupAddressesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LookupAddressesResult" type="tns:AddressLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AddressLookupResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Successful" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSingleAddress" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SingleAddress" type="tns:Address" />
+          <s:element minOccurs="0" maxOccurs="1" name="MultipleAddresses" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Address">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Entity">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AddressLine1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AddressLine2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AddressLine3" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TownOrCity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Entity">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IsWithinSurrey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="postcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsWithinSurreyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsWithinSurreyResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LookupAddressesSoapIn">
+    <wsdl:part name="parameters" element="tns:LookupAddresses" />
+  </wsdl:message>
+  <wsdl:message name="LookupAddressesSoapOut">
+    <wsdl:part name="parameters" element="tns:LookupAddressesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsWithinSurreySoapIn">
+    <wsdl:part name="parameters" element="tns:IsWithinSurrey" />
+  </wsdl:message>
+  <wsdl:message name="IsWithinSurreySoapOut">
+    <wsdl:part name="parameters" element="tns:IsWithinSurreyResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AddressLookUpWebServiceSoap">
+    <wsdl:operation name="LookupAddresses">
+      <wsdl:input message="tns:LookupAddressesSoapIn" />
+      <wsdl:output message="tns:LookupAddressesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsWithinSurrey">
+      <wsdl:input message="tns:IsWithinSurreySoapIn" />
+      <wsdl:output message="tns:IsWithinSurreySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AddressLookUpWebServiceSoap" type="tns:AddressLookUpWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LookupAddresses">
+      <soap:operation soapAction="http://tempuri.org/LookupAddresses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsWithinSurrey">
+      <soap:operation soapAction="http://tempuri.org/IsWithinSurrey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AddressLookUpWebServiceSoap12" type="tns:AddressLookUpWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LookupAddresses">
+      <soap12:operation soapAction="http://tempuri.org/LookupAddresses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsWithinSurrey">
+      <soap12:operation soapAction="http://tempuri.org/IsWithinSurrey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AddressLookUpWebService">
+    <wsdl:port name="AddressLookUpWebServiceSoap" binding="tns:AddressLookUpWebServiceSoap">
+      <soap:address location="https://www.espetccms02.co.uk/ALinkWebServicesDev/Tools/AddressLookUpWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AddressLookUpWebServiceSoap12" binding="tns:AddressLookUpWebServiceSoap12">
+      <soap12:address location="https://www.espetccms02.co.uk/ALinkWebServicesDev/Tools/AddressLookUpWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

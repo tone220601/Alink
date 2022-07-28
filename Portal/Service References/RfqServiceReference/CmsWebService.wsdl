@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateRfq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfqDt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="RoutesDt">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateRfqResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateRfqResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testcon">
+        <s:complexType />
+      </s:element>
+      <s:element name="testconResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testconResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateRfqSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateRfq" />
+  </wsdl:message>
+  <wsdl:message name="CreateRfqSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateRfqResponse" />
+  </wsdl:message>
+  <wsdl:message name="testconSoapIn">
+    <wsdl:part name="parameters" element="tns:testcon" />
+  </wsdl:message>
+  <wsdl:message name="testconSoapOut">
+    <wsdl:part name="parameters" element="tns:testconResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CmsWebServiceSoap">
+    <wsdl:operation name="CreateRfq">
+      <wsdl:input message="tns:CreateRfqSoapIn" />
+      <wsdl:output message="tns:CreateRfqSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testcon">
+      <wsdl:input message="tns:testconSoapIn" />
+      <wsdl:output message="tns:testconSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CmsWebServiceSoap" type="tns:CmsWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateRfq">
+      <soap:operation soapAction="http://tempuri.org/CreateRfq" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testcon">
+      <soap:operation soapAction="http://tempuri.org/testcon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CmsWebServiceSoap12" type="tns:CmsWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateRfq">
+      <soap12:operation soapAction="http://tempuri.org/CreateRfq" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testcon">
+      <soap12:operation soapAction="http://tempuri.org/testcon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CmsWebService">
+    <wsdl:port name="CmsWebServiceSoap" binding="tns:CmsWebServiceSoap">
+      <soap:address location="https://www.espetccms02.co.uk/ALinkWebServicesDev/CMS/CmsWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CmsWebServiceSoap12" binding="tns:CmsWebServiceSoap12">
+      <soap12:address location="https://www.espetccms02.co.uk/ALinkWebServicesDev/CMS/CmsWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

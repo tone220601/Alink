@@ -1,0 +1,31 @@
+﻿@using System.Diagnostics
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+</head>
+    <body>
+        <div id="mainDiv" class="MainPage">
+            @RenderBody()
+            
+  
+            @RenderSection("scripts", required: false)
+        </div>
+    </body>
+    @if (Debugger.IsAttached)
+    {
+        
+    }
+    <script type="text/javascript">
+        function setCss() {
+
+        }
+    </script>
+</html>

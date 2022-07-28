@@ -1,0 +1,266 @@
+﻿@model Portal.Models.Employer
+
+@{
+    ViewBag.Title = "Employer";
+}
+
+<div style="width: 0; height: 115px;"></div>
+
+<div id="step1Div" style="background: url('/Content/Images/Step_2.png') no-repeat;  margin:0 auto; padding-top: 74px; width: 318px; ">
+    
+</div>
+<div id="backGroundDiv" style="background-color: #CEF6F5; width: 700px; height: 180px; margin:0 auto; margin-top: 20px;">
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+   
+        <div class="wrap"></div>
+         <div style="float: left; margin-top: 10px;">
+             <img src="/Content/Images/Step_2Number.png" height="30" width="30" />
+              
+        </div>
+            <h3 style="float: left; margin-left: 5px; margin-top: 15px">Your Employer details</h3>
+    
+        <br />
+        <div style="margin-bottom: 50px;">
+        <div class="wrap"></div>
+        <div class="field_left">Is your Employer paying</div>
+            <div class="field_right">Yes<input type="checkbox" id="employerYesCheckBox" value="Yes" title="Click to enter Emplyer details" />
+                No <input type="checkbox" id="emplyerNoCheckBox" value="no" title="Click to continue to journey."  />
+                <br />
+                <div class="field_left">Translink for your aLink Card? </div>
+        
+            </div>
+            </div>
+        <div id="showemployer" >
+            <fieldset>
+                <legend></legend>
+       <hr style="border-color: #9ad4d5; border-top-style: solid; border-top-width: 1px;"/>
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                       Employer name:
+                    </div>
+                    <div class="field_right">
+                       <span id="EmployerNameSpan" style="display: none; margin-left: 5px;" >A Employer name is required</span>
+                          @Html.EditorFor(model => model.EmployerName)
+                        </div>
+                </div>
+                  <div id="lookupPane" class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">Lookup Address:</div>
+            <div class="field_right" id="addressLookupPane">
+                @Html.TextBox("LookupPostcode")
+                  <input style="margin-left: 135px;" id="lookupAddressButton" type="button" value="Lookup Address"/>     
+            </div>
+        </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                       Address 1:
+                    </div>
+                    <div class="field_right">
+                       <span id="Address1Span" style="display: none; margin-left: 5px;" >A Employer address is required</span>
+                         @Html.EditorFor(model => model.Address1)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                       Address 2:
+                    </div>
+                    <div class="field_right">
+                        @Html.EditorFor(model => model.Address2)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        Town/City:
+                    </div>
+                    <div class="field_right">
+                       <span id="TownSpan" style="display: none; margin-left: 5px;" >A Employer town is required</span>
+                         @Html.EditorFor(model => model.Town)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        Postcode: 
+                    </div>
+                    <div class="field_right">
+                       <span id="PostCodeSpan" style="display: none; margin-left: 5px;" >A Employer postcode is required</span>
+                           @Html.EditorFor(model => model.PostCode)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        Employee number:
+                    </div>
+                    <div class="field_right">
+                       <span id="EmployeeNumberSpan" style="display: none; margin-left: 5px;" >A Employee number is required</span>
+                            @Html.TextBoxFor(model => model.EmployeeNumber)
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <br />
+         <div style="margin-top: -5px;">
+    <input type="button" id="backButton" value="Cancel" 
+           style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: left"   
+           onclick="location.href='@Url.Action("Index", "Request")    '"  />
+             <input type="submit" id="continueButton" value="Continue" 
+                    style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: right"/>
+        </div>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#showemployer").hide();
+                $('#backGroundDiv').css('height', '120px');
+
+                if ($('#LookupPostcode').val() == "") {
+                    $('#LookupPostcode').val("Please enter your postcode to search for you address");
+                    $('#LookupPostcode').css('color', '#808080');
+                }
+            });
+
+            $('#LookupPostcode').click(function() {
+                if ($(this).val() == 'Please enter your postcode to search for you address') {
+                    $('#LookupPostcode').css('color', '#000080');
+                    $(this).val('');
+                };
+            });
+
+            $('#emplyerNoCheckBox').click(function() {
+                if ($('#employerYesCheckBox').is(':checked')) {
+                    $('#employerYesCheckBox').attr('checked', false);
+                    $('#showemployer').hide();
+                    $('#backGroundDiv').css('height', '120px');
+                }
+            });
+            $('#employerYesCheckBox').click(
+                function() {
+                    if ($(this).is(':checked')) {
+                        $('#emplyerNoCheckBox').attr('checked', false);
+                        $("#showemployer").slideDown("slow");
+                        $('#backGroundDiv').css('height', '410px').slideDown("slow", "linear");
+                        $('#continueButton').fadeIn(2000);
+                    }
+                });
+
+            $('#lookupAddressButton').click(function(e) {
+                e.preventDefault();
+                var regPostcode = /^[a-zA-Z]{1,2}[\d]{1,2}[a-zA-Z]?\s?\d[a-zA-Z]{2}$/;
+                if (regPostcode.test($('#LookupPostcode').val()) == true) {
+                    $.post("/Request/LookupAddresses", { postcode: $('#LookupPostcode').val() },
+                        function(addresses) {
+                            if (addresses != null) {
+                                var s = $('<select id="addresslist" style="margin-left:135px; width: 71%; margin-top:5px;"/>');
+                                $('<option />', { text: 'Please select address', value: '' }).appendTo(s);
+                                for (var address in addresses) {
+                                    $('<option />', { text: addresses[address].replace(',', ', '), value: address }).appendTo(s);
+                                }
+                                s.appendTo('#addressLookupPane');
+                                $('#addresslist').change(function() {
+                                    if ($('#addresslist').val() != '') {
+                                        $.post("/Request/LookupAddresses", { postcode: $('#addresslist').val() },
+                                            function(singleAddress) {
+                                                $('#Address1').val(singleAddress.AddressLine1);
+                                                $('#Address2').val(singleAddress.AddressLine2);
+                                                $('#Town').val(singleAddress.TownOrCity);
+                                                $('#PostCode').val($('#LookupPostcode').val().toUpperCase());
+                                                $('#lookupPane').remove();
+                                                $('#backGroundDiv').css('height', '334px');
+                                            });
+                                    }
+                                });
+                            } else {
+                                alert("No addresses found.");
+                            }
+                        });
+                } else {
+                    alert("Please enter a valid postcode.");
+                }
+            });
+
+
+            $("#EmployerName").blur(function() {
+                if ($('#EmployerName').val() != "") {
+                    $('#EmployerNameSpan').removeClass('validation-summary-errors');
+                    $('#EmployerNameSpan').hide();
+                }
+            });
+
+            $("#Address1").blur(function() {
+                if ($('#Address1').val() != "") {
+                    $('#Address1Span').removeClass('validation-summary-errors');
+                    $('#Address1Span').hide();
+                }
+            });
+            $("#Town").blur(function() {
+                if ($('#Town').val() != "") {
+                    $('#TownSpan').removeClass('validation-summary-errors');
+                    $('#TownSpan').hide();
+                }
+            });
+            $("#PostCode").blur(function() {
+                if ($('#PostCode').val() != "") {
+                    $('#PostCodeSpan').removeClass('validation-summary-errors');
+                    $('#PostCodeSpan').hide();
+                }
+            });
+            $("#EmployeeNumber").blur(function() {
+                if ($('#EmployeeNumber').val() != "") {
+                    $('#EmployeeNumberSpan').removeClass('validation-summary-errors');
+                    $('#EmployeeNumberSpan').hide();
+                }
+            });
+            $('#continueButton').click(function(e) {
+                    if ($('#employerYesCheckBox').is(':checked')) {
+                        if ($('#EmployerName').val() == "") {
+                            e.preventDefault();
+                            $('#EmployerNameSpan').addClass('validation-summary-errors');
+                            $('#EmployerNameSpan').show();
+                            return false;
+                        }
+                        if ($('#Address1').val() == "") {
+                            e.preventDefault();
+                            $('#Address1Span').addClass('validation-summary-errors');
+                            $('#Address1Span').show();
+                            return false;
+                        }
+                        if ($('#Town').val() == "") {
+                            e.preventDefault();
+                            $('#TownSpan').addClass('validation-summary-errors');
+                            $('#TownSpan').show();
+                            return false;
+                        } 
+                        if ($('#PostCode').val() == "") {
+                            e.preventDefault();
+                            $('#PostCodeSpan').addClass('validation-summary-errors');
+                            $('#PostCodeSpan').show();
+                            return false;
+                        } 
+                        if ($('#EmployeeNumber').val() == "") {
+                            e.preventDefault();
+                            $('#EmployeeNumberSpan').addClass('validation-summary-errors');
+                            $('#EmployeeNumberSpan').show();
+                            return false;
+                        } 
+                    }
+                    return true;
+                }
+            );
+        </script>
+    }
+</div>

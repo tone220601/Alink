@@ -1,0 +1,596 @@
+﻿@model Portal.Models.Journey
+
+@{
+    ViewBag.Title = "Journey";
+}
+
+<div style="width: 0; height: 115px;"></div>
+
+<div id="step1Div" style="background: url('/Content/Images/Step_3.png') no-repeat;  margin:0 auto; padding-top: 74px; width: 318px; ">
+    
+</div>
+
+<div id="backGroundDiv" style="background-color: #CEF6F5; width: 700px; height: 600px; margin:0 auto; margin-top: 20px;">
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+     <div class="wrap"></div>
+         <div style="float: left; margin-top: 10px;">
+             <img src="/Content/Images/Step_3Number.png" height="30" width="30" />
+              
+        </div>
+    <h3 style="float: left; margin-left: 5px; margin-top: 15px">Your Journey</h3>
+        <br/>
+        <br/>
+        </div>
+    <div style="padding: 20px 0 10px 40px;">
+        You can select up to 3 different modes of travel; Metro, NI Railways and Ulsterbus.
+        <br/>
+        Please give us as much details as possible on your journey to help us provide an accurate quotation.
+    </div>
+    <fieldset>
+        <legend></legend>
+        <hr style="border-color: #9ad4d5; border-top-style: solid; border-top-width: 1px;"/>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left"><h3>Journey 1</h3></div>
+            <div class="field_left">Mode of travel:</div>
+            <div  class="field_right" >
+                @Html.DropDownListFor(model=> model.ModeOfTransport1, new SelectList(Model.ModesOfTransports,"Value","Text"))
+                @Html.ValidationMessageFor(model=> model.ModeOfTransport1)
+            </div>
+            <div class="field_left">From: </div>
+            <div id="standardFrom1" class="field_right">
+                @Html.EditorFor(model=> model.From1)
+                @Html.ValidationMessageFor(model=> model.From1)
+                <input type="hidden" id="From1hdn"/>
+            </div>
+            <div id="NirResultFrom1" class="field_right" >
+            </div>
+            <div class="field_left">To: </div>
+            <div id="standardTo1" class="field_right">
+                @Html.EditorFor(model=> model.To1)
+                @Html.ValidationMessageFor(model=> model.To1)
+                 <input type="hidden" id="To1hdn"/>
+            </div>
+            <div id="NirResultTo1" class="field_right" >
+            </div>
+        </div>
+
+        <div id="journey2Div">
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left"><h3>Journey 2</h3></div>
+            <div class="field_left">Mode of travel:</div>
+            <div class="field_right">
+                @Html.DropDownListFor(model=> model.ModeOfTransport2, new SelectList(Model.ModesOfTransports,"Value","Text"))
+        
+            </div>
+            <div class="field_left">From: </div>
+            <div id="standardFrom2" class="field_right">
+                @Html.EditorFor(model=> model.From2) 
+                @Html.ValidationMessageFor(model=> model.From2)
+                   <input type="hidden" id="From2hdn"/>           
+            </div>
+             <div id="NirResultFrom2" class="field_right" >
+               
+            </div>
+            <div class="field_left">
+                To:
+            </div>
+            <div id="standardTo2" class="field_right">
+                @Html.EditorFor(model=> model.To2)   
+                @Html.ValidationMessageFor(model=> model.To2)
+                   <input type="hidden" id="To2hdn"/>
+            </div>
+          <div id="NirResultTo2" class="field_right" >
+               
+            </div>
+        </div>
+        </div>
+
+        <div id="journey3Div">
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left"><h3>Journey 3</h3></div>
+            <div class="field_left">Mode of travel:</div>
+            <div class="field_right">
+                @Html.DropDownListFor(model=> model.ModeOfTransport3, new SelectList(Model.ModesOfTransports,"Value","Text"))
+            </div>
+            <div class="field_left">
+                From: 
+            </div>
+            <div id="standardFrom3" class="field_right">
+                @Html.EditorFor(model=> model.From3)    
+                @Html.ValidationMessageFor(model=> model.From3)
+                     <input type="hidden" id="From3hdn"/>
+            </div>
+             <div id="NirResultFrom3" class="field_right" >
+               
+            </div>
+            <div class="field_left">
+                To: 
+            </div>
+            <div id="standardTo3" class="field_right">
+                @Html.EditorFor(model=> model.To3)   
+                @Html.ValidationMessageFor(model=> model.To3)
+                     <input type="hidden" id="To3hdn"/>
+            </div>
+              <div id="NirResultTo3" class="field_right" >
+               
+            </div>
+        </div>
+        </div>
+       
+       
+    </fieldset>
+    <div id="buttonsDiv"style="margin-top: 5px;">
+    <input type="button" id="backButton" value="Cancel" 
+           style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: left"   
+           onclick="location.href='@Url.Action("Index", "Request")'"  />
+    <input type="submit" id="continuelButton" value="Continue" 
+           style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: right"
+           />
+        </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        var StationList;
+
+        $(document).ready(function() {
+
+            if (StationList == null) {
+                //getStations();
+            }
+            $('#backGroundDiv').css('height', '280px');
+            $('#journey2Div').hide();
+            $('#journey3Div').hide();
+
+            if ($('#ModeOfTransport2').val() != 4) {
+                $('#backGroundDiv').css('height', '560px');
+                $('#journey2Div').show();
+                $('#journey3Div').show();
+                $('buttonsDiv#').css('margin-top', '1px');
+            }
+        });
+
+        function getStations() {
+            $.post("/Request/RailStailsJsonResult",
+                function(stations) {
+                    if (stations != null) {
+                        return StationList = stations;
+                    } else {
+                        return StationList = "A error occurred";
+                    }
+                });
+        }
+
+        function ContiansValue(value) {
+            if (value != "") {
+                for (var i = 0; i < StationList.length; i++) {
+                    if (value == StationList[i].StationName) {
+                        return true;
+                    }
+                }
+            }
+            if (value == "NA") {
+                return true;
+            }
+            return false;
+        }
+
+        $('#ModeOfTransport1').change(function(e) {
+
+            if ($(this).val() == $('#ModeOfTransport2').val()) {
+                if ($(this).val() == 1 || $(this).val() == 3) {
+                    $(this).val(0);
+                    alert("You cannot have more the one journey with either ME or NIR");
+                    return;
+                }
+            }
+            if ($(this).val() == $('#ModeOfTransport3').val()) {
+                if ($(this).val() == 1 || $(this).val() == 3) {
+                    $(this).val(0);
+                    alert("You cannot have more the one journey with either ME or NIR");
+                    return;
+                }
+            }
+            if ($(this).val() != 4) {
+                $('#backGroundDiv').css('height', '420px');
+                $('#journey2Div').fadeIn(1000);
+            }
+            if ($(this).val() == 3) {
+
+                if (StationList.value != "A error occurred" && !ContiansValue($('#From1hdn').val())) {
+                    $('#standardFrom1').hide();
+
+
+                    var f = $('<select id="NIRStationListFrom1" style="width: 72%;" onchange="NIRStationListFrom1Change()"/>');
+                    $('<option />', { text: 'Please select address', value: '0' }).appendTo(f);
+
+                    for (var i = 0; i < StationList.length; i++) {
+                        $('<option />', { text: StationList[i].StationName, value: StationList[i].StationId }).appendTo(f);
+                    }
+
+                    f.appendTo('#NirResultFrom1');
+
+                    $('#NirResultFrom1').show();
+                } else {
+                    $('#standardFrom1').hide();
+                    $('#NirResultFrom1').show();
+                }
+
+
+                if (StationList.value != "A error occurred" && !ContiansValue($('#To1hdn').val())) {
+
+                    $('#standardTo1').hide();
+
+                    var t = $('<select id="NIRStationListTo1" style="width: 72%;" onchange="NIRStationListTo1Change()"/>');
+                    $('<option />', { text: 'Please select address', value: '' }).appendTo(t);
+
+                    for (var i = 0; i < StationList.length; i++) {
+                        $('<option />', { text: StationList[i].StationName, value: StationList[i].StationId }).appendTo(t);
+                    }
+
+
+                    t.appendTo('#NirResultTo1');
+
+                    $('#NirResultTo1').show();
+                } else {
+
+                    $('#standardTo1').hide();
+                    $('#NirResultTo1').show();
+                }
+            }
+            if ($(this).val() == 2) {
+                $('#NirResultFrom1').hide();
+                $('#NirResultTo1').hide();
+                $('#standardFrom1').show();
+                $('#standardTo1').show();
+            }
+            if ($(this).val() == 1) {
+                $('#NirResultFrom1').hide();
+                $('#NirResultTo1').hide();
+                $('#standardFrom1').show();
+                $('#standardTo1').show();
+            }
+            if ($(this).val() == 4) {
+                $('span.field-validation-error').css('display', 'none');
+                $('#backGroundDiv').css('height', '280px');
+                $('#journey3Div').hide();
+                $('#journey2Div').hide();
+
+                $('#ModeOfTransport2').val(4);
+                $('#ModeOfTransport3').val(4);
+                $('#From2').val("");
+                $('#From3').val("");
+                $('#To2').val("");
+                $('#To3').val("");
+            }
+        });
+
+        function NIRStationListFrom1Change() {
+            if ($('#NIRStationListFrom1').val() != 0) {
+                if ($('#NIRStationListFrom1 option:selected').text() != $('#NIRStationListTo1 option:selected').text()) {
+                    $('#From1hdn').val($('#NIRStationListFrom1 option:selected').text());
+                } else {
+                    alert("You cannot have the same travel routes.");
+                }
+            }
+        }
+
+        function NIRStationListTo1Change() {
+            if ($('#NIRStationListTo1').val() != 0) {
+                if ($('#NIRStationListTo1 option:selected').text() != $('#NIRStationListFrom1 option:selected').text()) {
+                    $('#To1hdn').val($('#NIRStationListTo1 option:selected').text());
+                } else {
+                    alert("You cannot have the same travel routes.");
+                }
+            }
+        }
+
+        $('#From1').blur(function() {
+            if ($('#From1hdn').val() != "" && $('#From1').val() != "") {
+                $('#NIRStationListFrom1').val(0);
+                $('#From1hdn').val("NA");
+            }
+        });
+
+        $('#To1').blur(function() {
+            if ($('#To1hdn').val() != "" && $('#To1').val() != "") {
+                $('#NIRStationListTo1').val(0);
+                $('#To1hdn').val("NA");
+            }
+        });
+
+        $('#ModeOfTransport2').change(function() {
+
+            if ($(this).val() == $('#ModeOfTransport1').val()) {
+                if ($(this).val() == 1 || $(this).val() == 3) {
+                    $(this).val(0);
+                    alert("You cannot have more the one journey with either ME or NIR");
+                    return;
+                }
+            }
+            if ($(this).val() == $('#ModeOfTransport3').val()) {
+                if ($(this).val() == 1 || $(this).val() == 3) {
+                    $(this).val(0);
+                    alert("You cannot have more the one journey with either ME or NIR");
+                    return;
+                }
+            }
+
+            if ($(this).val() != 4) {
+                $('#backGroundDiv').css('height', '560px');
+                $('#journey3Div').fadeIn(1000);
+            }
+            if ($(this).val() == 3) {
+
+                if (StationList.value != "A error occurred" && !ContiansValue($('#From2hdn').val())) {
+                    $('#standardFrom2').hide();
+
+
+                    var f = $('<select id="NIRStationListFrom2" style="width: 72%;" onchange="NIRStationListFrom2Change()"/>');
+                    $('<option />', { text: 'Please select address', value: '0' }).appendTo(f);
+
+                    for (var i = 0; i < StationList.length; i++) {
+                        $('<option />', { text: StationList[i].StationName, value: StationList[i].StationId }).appendTo(f);
+                    }
+
+                    f.appendTo('#NirResultFrom2');
+
+                    $('#NirResultFrom2').show();
+                } else {
+                    $('#standardFrom2').hide();
+                    $('#NirResultFrom2').show();
+                }
+
+
+                if (StationList.value != "A error occurred" && !ContiansValue($('#To2hdn').val())) {
+
+                    $('#standardTo2').hide();
+
+                    var t = $('<select id="NIRStationListTo2" style="width: 72%;" onchange="NIRStationListTo2Change()"/>');
+                    $('<option />', { text: 'Please select address', value: '' }).appendTo(t);
+
+                    for (var i = 0; i < StationList.length; i++) {
+                        $('<option />', { text: StationList[i].StationName, value: StationList[i].StationId }).appendTo(t);
+                    }
+
+
+                    t.appendTo('#NirResultTo2');
+
+                    $('#NirResultTo2').show();
+                } else {
+
+                    $('#standardTo2').hide();
+                    $('#NirResultTo2').show();
+                }
+            }
+            if ($(this).val() == 2) {
+                $('#NirResultFrom2').hide();
+                $('#NirResultTo2').hide();
+                $('#standardFrom2').show();
+                $('#standardTo2').show();
+            }
+            if ($(this).val() == 1) {
+                $('#NirResultFrom2').hide();
+                $('#NirResultTo2').hide();
+                $('#standardFrom2').show();
+                $('#standardTo2').show();
+            }
+            if ($(this).val() == 4) {
+                $('span.field-validation-error').css('display', 'none');
+                $('#backGroundDiv').css('height', '420px');
+                $('#journey3Div').hide();
+
+                $('#ModeOfTransport3').val(4);
+                $('#From2').val("");
+                $('#From3').val("");
+            }
+        });
+
+        function NIRStationListFrom2Change() {
+            if ($('#NIRStationListFrom2').val() != 0) {
+                if ($('#NIRStationListFrom2 option:selected').text() != $('#NIRStationListTo2 option:selected').text()) {
+                    $('#From2hdn').val($('#NIRStationListFrom2 option:selected').text());
+                } else {
+                    alert("You cannot have the same travel routes.");
+                }
+            }
+        }
+
+        function NIRStationListTo2Change() {
+            if ($('#NIRStationListTo2').val() != 0) {
+                if ($('#NIRStationListTo2 option:selected').text() != $('#NIRStationListFrom2 option:selected').text()) {
+                    $('#To2hdn').val($('#NIRStationListTo2 option:selected').text());
+                } else {
+                    alert("You cannot have the same travel routes.");
+                }
+            }
+        }
+
+        $('#From2').blur(function() {
+            if ($('#From2hdn').val() != "" && $('#From2').val() != "") {
+                $('#NIRStationListFrom2').val(0);
+                $('#From2hdn').val("NA");
+            }
+        });
+
+        $('#To2').blur(function() {
+            if ($('#To2hdn').val() != "" && $('#To2').val() != "") {
+                $('#NIRStationListTo2').val(0);
+                $('#To2hdn').val("NA");
+            }
+        });
+
+        $('#ModeOfTransport3').change(function() {
+
+            if ($(this).val() == $('#ModeOfTransport1').val()) {
+                if ($(this).val() == 1 || $(this).val() == 3) {
+                    $(this).val(0);
+                    alert("You cannot have more the one journey with either ME or NIR");
+                    return;
+                }
+            }
+            if ($(this).val() == $('#ModeOfTransport2').val()) {
+                if ($(this).val() == 1 || $(this).val() == 3) {
+                    $(this).val(0);
+                    alert("You cannot have more the one journey with either ME or NIR");
+                    return;
+                }
+            }
+
+            if ($(this).val() == 3) {
+
+                if (StationList.value != "A error occurred" && !ContiansValue($('#From3hdn').val())) {
+                    $('#standardFrom3').hide();
+
+
+                    var f = $('<select id="NIRStationListFrom3" style="width: 72%;" onchange="NIRStationListFrom3Change()"/>');
+                    $('<option />', { text: 'Please select address', value: '0' }).appendTo(f);
+
+                    for (var i = 0; i < StationList.length; i++) {
+                        $('<option />', { text: StationList[i].StationName, value: StationList[i].StationId }).appendTo(f);
+                    }
+
+                    f.appendTo('#NirResultFrom3');
+
+                    $('#NirResultFrom3').show();
+                } else {
+                    $('#standardFrom3').hide();
+                    $('#NirResultFrom3').show();
+                }
+
+
+                if (StationList.value != "A error occurred" && !ContiansValue($('#To2hdn').val())) {
+
+                    $('#standardTo3').hide();
+
+                    var t = $('<select id="NIRStationListTo3" style="width: 72%;" onchange="NIRStationListTo3Change()"/>');
+                    $('<option />', { text: 'Please select address', value: '' }).appendTo(t);
+
+                    for (var j = 0; j < StationList.length; j++) {
+                        $('<option />', { text: StationList[j].StationName, value: StationList[j].StationId }).appendTo(t);
+                    }
+
+
+                    t.appendTo('#NirResultTo3');
+
+                    $('#NirResultTo3').show();
+                } else {
+
+                    $('#standardTo3').hide();
+                    $('#NirResultTo3').show();
+                }
+            }
+            if ($(this).val() != 3) {
+                $('#NIRStationListFrom3').remove();
+                $('#NIRStationListTo3').remove();
+                $('#From3').val('');
+                $('#To3').val('');
+                $('#standardFrom3').show();
+                $('#standardTo3').show();
+            }
+        });
+
+        function NIRStationListFrom3Change() {
+            if ($('#NIRStationListFrom3').val() != 0) {
+                if ($('#NIRStationListFrom3 option:selected').text() != $('#NIRStationListTo3 option:selected').text()) {
+                    $('#From3hdn').val($('#NIRStationListFrom3 option:selected').text());
+                } else {
+                    alert("You cannot have the same travel routes.");
+                }
+            }
+        }
+
+        function NIRStationListTo3Change() {
+            if ($('#NIRStationListTo3').val() != 0) {
+                if ($('#NIRStationListTo3 option:selected').text() != $('#NIRStationListFrom3 option:selected').text()) {
+                    $('#To3hdn').val($('#NIRStationListTo3 option:selected').text());
+                } else {
+                    alert("You cannot have the same travel routes.");
+                }
+            }
+        }
+
+        $('#From3').blur(function() {
+            if ($('#From3hdn').val() != "" && $('#From3').val() != "") {
+                $('#NIRStationListFrom3').val(0);
+                $('#From3hdn').val("NA");
+            }
+        });
+
+        $('#To3').blur(function() {
+            if ($('#To3hdn').val() != "" && $('#To3').val() != "") {
+                $('#NIRStationListTo3').val(0);
+                $('#To3hdn').val("NA");
+            }
+        });
+
+        $('#continuelButton').click(function(e) {
+
+            if ($('#ModeOfTransport1').val() == 3) {
+                $('#From1').val($('#From1hdn').val());
+                $('#To2').val($('#To1hdn').val());
+                $.post("/Request/Journey");
+            }
+            if ($('#ModeOfTransport2').val() == 3) {
+                if ($('#From2hdn').val() == "NA" || $('#To2hdn').val() == "NA") {
+                    e.preventDefault();
+                    alert("You must have a from and to route selected or entered, if you want to use journey 2");
+                } else {
+                    $('#From2').val($('#From2hdn').val());
+                    $('#To2').val($('#To2hdn').val());
+                    $.post("/Request/Journey");
+                }
+            }
+            if ($('#ModeOfTransport3').val() == 3) {
+                if ($('#From3hdn').val() == "NA" || $('#To3hdn').val() == "NA") {
+                    e.preventDefault();
+                    alert("You must have a from and to route selected or entered, if you want to use journey 3");
+                } else {
+                    $('#From3').val($('#From3hdn').val());
+                    $('#To3').val($('#To3hdn').val());
+                    $.post("/Request/Journey");
+                }
+            } else {
+                $.post("/Request/Journey");
+            }
+        });
+
+        function validateRoutes() {
+            if ($('#ModeOfTransport1').val() == 3) {
+             
+                $('#From1').val($('#From1hdn').val());
+                $('#To2').val($('#To1hdn').val());
+            }
+            if ($('#ModeOfTransport2').val() == 3) {
+                if ($('#From2hdn').val() == "NA" || $('#To2hdn').val() == "NA") {
+                    alert("You must have a from and to route selected or entered, if you want to use journey 2");
+                } else {
+                $('#From2').val($('#From2hdn').val());
+                $('#To2').val($('#To2hdn').val());
+            }
+            }
+            if ($('#ModeOfTransport3').val() == 3) {
+                if ($('#From3hdn').val() == "NA" || $('#To3hdn').val() == "NA") {
+                    alert("You must have a from and to route selected or entered, if you want to use journey 3");
+                } else {
+               $('#From3').val($('#From3hdn').val());
+               $('#To3').val($('#To3hdn').val());
+                }
+            }
+        }
+
+
+    </script>
+}
+    </div>

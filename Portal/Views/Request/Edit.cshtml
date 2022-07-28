@@ -1,0 +1,350 @@
+﻿@model Portal.Models.EditDetails
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<h2>Edit</h2>
+
+<div id="step1Div" style="background: url('/Content/Images/Step_4.png') no-repeat;  margin:0 auto; padding-top: 74px; width: 318px; ">
+    
+</div>
+
+<div id="backGroundDiv" style="background-color: #CEF6F5; width: 700px; height: 700px; margin:0 auto; margin-top: 20px;">
+  
+    
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+   
+       <div>
+            <fieldset>
+                       <div class="wrap"></div>
+        <div style="float: left; margin-top: 10px;">
+            <img src="/Content/Images/Step_4Number.png" height="30" width="30" />
+              
+        </div>
+        <h2 style="float: left; margin-left: 5px; margin-top: 15px">Confirm & Submit</h2>
+                   
+                <legend></legend>
+                 <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.Title)</div>
+            <div class="field_right">
+                <div >
+                    @Html.DropDownListFor(model => model.Customer.Titles, Model.Customer.Items)
+                     @*@Html.ValidationMessageFor(model => model.Title)*@
+                </div>
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.FirstName)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.FirstName)
+                <br/>
+                @Html.ValidationMessageFor(model => model.Customer.FirstName)
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.Surname)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.Surname)
+                @Html.ValidationMessageFor(model => model.Customer.Surname)
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.HouseNumberOrName)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.HouseNumberOrName)
+                @Html.ValidationMessageFor(model => model.Customer.HouseNumberOrName)
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.Address1)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.Address1)
+                @*@Html.ValidationMessageFor(model => model.Address1)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.Address2)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.Address2)
+                @*@Html.ValidationMessageFor(model => model.Address2)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.Town)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.Town)
+                @*@Html.ValidationMessageFor(model => model.Town)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.PostCode)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.PostCode)
+                @Html.ValidationMessageFor(model => model.Customer.PostCode)
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.Email)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.Email)
+                @Html.ValidationMessageFor(model => model.Customer.Email,"Please enter a valid email address")
+            </div>
+        </div>
+          <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.ConfirmEmail)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.ConfirmEmail)
+                @Html.ValidationMessageFor(model => model.Customer.ConfirmEmail)
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.TelePhoneNumber)</div>
+            <div class="field_right">
+                @Html.TextBoxFor(model=> model.Customer.TelePhoneNumber)
+                @*@Html.ValidationMessageFor(model => model.TelePhoneNumber)*@
+            </div>
+        </div>
+        <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.DateOfBirth)</div>
+            <div class="field_right">
+                  @Html.EditorFor(model => model.Customer.DateOfBirth)
+                <div id="dobDiv" style="float: left;">
+                      @Html.ValidationMessageFor(model => model.Customer.DateOfBirth,"This is not a valid Dob.")
+                </div>
+              
+            </div>
+        </div>
+         <div class="editor-field">
+            <div class="wrap"></div>
+            <div class="field_left">@Html.LabelFor(model => model.Customer.Gender)</div>
+            <div class="field_right">
+                @Html.EditorFor(model => model.Customer.Gender)
+            </div>
+        </div>
+                
+                /*Journey*/
+      
+                <div class="wrap"></div>
+                <div class="field_left"><b>Journey 1</b></div>
+                <div class="field_left">Mode of travel</div>
+              
+                <div class="field_right_Confirm" >
+                    @Html.DropDownListFor(model => model.Journey.ModeOfTransport1, new SelectList(Model.Journey.ModesOfTransports, "Value","Text"))
+                </div>
+                <div class="field_left">From: </div>
+                <div class="field_right_Confirm">
+                    @Html.EditorFor(model => model.Journey.From1)
+                </div>
+                <div class="field_left">To: </div>
+                <div class="field_right_Confirm">
+                    @Html.EditorFor(model => model.Journey.To1)
+                </div>
+      
+                <div id="journey2Div">
+                <div class="wrap"></div>
+                <div class="field_left"><b>Journey 2</b></div>
+                <div class="field_left">Mode of travel</div>
+                <div class="field_right_Confirm">
+                  @Html.DropDownListFor(model => model.Journey.ModeOfTransport1, new SelectList(Model.Journey.ModesOfTransports, "Value","Text"))
+                </div>
+                <div class="field_left">From: </div>
+                <div id="from2Div" class="field_right_Confirm">
+                    @Html.EditorFor(model => model.Journey.From2)              
+                </div>
+                <div class="field_left">
+                    To:
+                </div>
+                <div id="to2Div" class="field_right_Confirm">
+                    @Html.EditorFor(model => model.Journey.To2)              
+                </div>
+                    </div>
+
+   <div id="journey3Div">
+                    <div class="wrap"></div>
+                    <div class="field_left"><b>Journey 3</b></div>
+                    <div class="field_left">
+                        Mode of travel
+                    </div>
+                    <div class="field_right_Confirm">
+                        @Html.DropDownListFor(model => model.Journey.ModeOfTransport1, new SelectList(Model.Journey.ModesOfTransports, "Value","Text"))
+                    </div>
+                    <div class="field_left">
+                        From: 
+                    </div>
+                    <div id="from3Div" class="field_right_Confirm">
+                        @Html.EditorFor(model => model.Journey.From3)    
+                    </div>
+                    <div class="field_left">
+                        To: 
+                    </div>
+                    <div id="to3Div" class="field_right_Confirm">
+                        @Html.EditorFor(model => model.Journey.To3)
+                        
+                    </div>
+                </div>
+
+                <div id="EmployerDiv">
+                     <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        @Html.LabelFor(model => model.Employer.EmployerName)
+                    </div>
+                    <div class="field_right">
+                        @Html.EditorFor(model => model.Employer.EmployerName)
+                        @Html.ValidationMessageFor(model => model.Employer.EmployerName)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        @Html.LabelFor(model => model.Employer.Address1)
+                    </div>
+                    <div class="field_right">
+                        @Html.EditorFor(model => model.Employer.Address1)
+                        @Html.ValidationMessageFor(model => model.Employer.Address1)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        @Html.LabelFor(model => model.Employer.Address2)
+                    </div>
+                    <div class="field_right">
+                        @Html.EditorFor(model => model.Employer.Address2)
+                        @Html.ValidationMessageFor(model => model.Employer.Address2)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        @Html.LabelFor(model => model.Employer.Town)
+                    </div>
+                    <div class="field_right">
+                        @Html.EditorFor(model => model.Employer.Town)
+                        @Html.ValidationMessageFor(model => model.Employer.Town)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        @Html.LabelFor(model => model.Employer.PostCode)
+                    </div>
+                    <div class="field_right">
+                        @Html.EditorFor(model => model.Employer.PostCode)
+                        @Html.ValidationMessageFor(model => model.Employer.PostCode)
+                    </div>
+                </div>
+
+                <div class="editor-field">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        @Html.LabelFor(model => model.Employer.EmployeeNumber)
+                    </div>
+                    <div class="field_right">
+                        @Html.TextBoxFor(model => model.Employer.EmployeeNumber)
+                        @Html.ValidationMessageFor(model => model.Employer.EmployeeNumber)
+                    </div>
+                </div>
+                </div>
+                    
+            </fieldset>
+          </div>
+      
+        <div style="margin-top: 15px;">
+            <input type="button" id="backButton" value="Back" 
+                   style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: left"   
+                   onclick=" location.href = '@Url.Action("Journey", "Request")    ' "
+                />
+          
+            <input type="submit" id="submitButton" value="Submit" 
+                   style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: right"
+                />
+        </div>
+   
+    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function() {
+          
+
+        @*    @if (Model.Employer == null)
+            {
+                <text>
+            HideEmplyer();     
+            </text>
+            }
+            @if (Model.Journey == "NA")
+            {
+                <text>
+            HideJourney(2);
+            </text>
+            }
+            @if (Model.ModeOfTravel2 == "NA")
+            {
+                <text>
+            HideJourney(1);
+            </text>
+            }*@
+        });
+
+      
+        function HideEmplyer() {
+            $('#EmployerDiv').hide();
+            $('#backGroundDiv').css('height', '605px');
+        };
+
+        function HideJourney(id) {
+            if (id != 1) {
+                $('#from3Div').css('border-color', '#cef6f5');
+                $('#to3Div').css('border-color', '#cef6f5');
+                //$('#journey3Div').hide();
+
+            } else {
+                $('#from3Div').css('border-color', '#cef6f5');
+                $('#to3Div').css('border-color', '#cef6f5');
+                $('#from2Div').css('border-color', '#cef6f5');
+                $('#to2Div').css('border-color', '#cef6f5');
+            }
+
+            //if ($('#EmployerDiv').css('display', 'none')) {
+            //    $('#backGroundDiv').css('height', '490px');
+            //} else if ($('#journey3Div').css('display', 'none')&&$('#EmployerDiv').css('display', 'none')) {
+            //    $('#backGroundDiv').css('height', '410px');
+            //} else if ($('#journey3Div').css('display', 'none') && $('#journey2Div').css('display', 'none')) {
+            //    $('#backGroundDiv').css('height', '320px');
+            //} else if(!$('#EmployerDiv').css('display', 'none') && $('#journey3Div').css('display', 'none') && $('#journey2Div').css('display', 'none') ) {
+            //    $('#backGroundDiv').css('height', '390px'); 
+            //}
+
+
+            //$('#EmployerDiv').hide();
+        }
+
+       
+
+    </script>
+}
+</div>
+

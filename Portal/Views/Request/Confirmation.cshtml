@@ -1,0 +1,281 @@
+﻿@using System.Linq
+
+@model Portal.Models.Confirmation
+
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+
+<div style="width: 0; height: 115px;"></div>
+
+<div id="step1Div" style="background: url('/Content/Images/Step_4.png') no-repeat;  margin:0 auto; padding-top: 74px; width: 318px; ">
+    
+</div>
+
+<div id="backGroundDiv" style="background-color: #CEF6F5; width: 700px; height: 655px; margin:0 auto; margin-top: 20px;">
+  
+      
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+   
+       <div>
+            <fieldset>
+                       <div class="wrap"></div>
+        <div style="float: left; margin-top: 10px;">
+            <img src="/Content/Images/Step_4Number.png" height="30" width="30" />
+              
+        </div>
+        <h2 style="float: left; margin-left: 5px; margin-top: 15px">Confirm & Submit</h2>
+                   
+                <legend></legend>
+                <div class="wrap"></div>
+                <div class="field_left">
+                    Name: 
+                </div>
+                <div class="field_right_Confirm" >
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+  
+                <div class="wrap"></div>
+                <div class="field_left">
+                    Address: 
+                </div>
+                <div class="field_right_Confirm" >
+                    @Html.DisplayFor(model => model.Address1)
+                    @Html.DisplayFor(model => model.Address2)
+                    @Html.DisplayFor(model => model.Address3)
+                    <br/>
+                    @Html.DisplayFor(model => model.Town)
+                    <br/>
+                    @Html.DisplayFor(model => model.County)
+                    <br/>
+                    @Html.DisplayFor(model => model.PostCode)
+                </div>
+                <div class="wrap"></div>
+                <div class="field_left">
+                    Email: 
+                </div>
+                <div id="emailDiv" class="field_right_Confirm" >
+                    @Html.DisplayFor(model => model.Email)
+                </div>
+                <div class="wrap"></div>
+                <div class="field_left">
+                    Telephone number:
+                </div>
+                <div id="phoneDiv" class="field_right_Confirm" >
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </div>
+                <div class="wrap"></div>
+                <div class="field_left">
+                    Date of birth: 
+                </div>
+                <div class="field_right_Confirm" >
+                    @Html.DisplayFor(model => model.Dob)
+                </div>
+      
+                <div class="wrap"></div>
+                <div class="field_left"><b>Journey 1</b></div>
+                <div class="field_left">Mode of travel</div>
+              
+                <div class="field_right_Confirm" >
+                    @Html.DisplayFor(model => model.ModeOfTravel1)
+                </div>
+                <div class="field_left">From: </div>
+                <div class="field_right_Confirm">
+                    @Html.DisplayFor(model => model.From1)
+                </div>
+                <div class="field_left">To: </div>
+                <div class="field_right_Confirm">
+                    @Html.DisplayFor(model => model.To1)
+                </div>
+      
+                <div id="journey2Div">
+                <div class="wrap"></div>
+                <div class="field_left"><b>Journey 2</b></div>
+                <div class="field_left">Mode of travel</div>
+                <div class="field_right_Confirm">
+                    @Html.DisplayFor(model => model.ModeOfTravel2)
+                </div>
+                <div class="field_left">From: </div>
+                <div id="from2Div" class="field_right_Confirm">
+                    @Html.DisplayFor(model => model.From2)              
+                </div>
+                <div class="field_left">
+                    To:
+                </div>
+                <div id="to2Div" class="field_right_Confirm">
+                    @Html.DisplayFor(model => model.To2)              
+                </div>
+                    </div>
+
+   <div id="journey3Div">
+                    <div class="wrap"></div>
+                    <div class="field_left"><b>Journey 3</b></div>
+                    <div class="field_left">
+                        Mode of travel
+                    </div>
+                    <div class="field_right_Confirm">
+                        @Html.DisplayFor(model => model.ModeOfTravel3)
+                    </div>
+                    <div class="field_left">
+                        From: 
+                    </div>
+                    <div id="from3Div" class="field_right_Confirm">
+                        @Html.DisplayFor(model => model.From3)    
+                    </div>
+                    <div class="field_left">
+                        To: 
+                    </div>
+                    <div id="to3Div" class="field_right_Confirm">
+                        @Html.DisplayFor(model => model.To3)
+                        
+                    </div>
+                </div>
+        
+                <div id="EmployerDiv">
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        Employer: 
+                    </div>
+                    <div class="field_right_Confirm">
+                        @Html.DisplayFor(model => model.Employer)
+                    </div>
+            
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        Work Address: 
+                    </div>
+                    <div class="field_right_Confirm">
+                        @Html.DisplayFor(model => model.EmplyerAddress)
+                    </div>
+             
+                    <div class="wrap"></div>
+                    <div class="field_left">
+                        Employee Number:
+                    </div>
+                    <div class="field_right_Confirm">
+                        @Html.DisplayFor(model => model.EmplyeeNumber)
+                
+                    </div>
+                </div>
+                    
+            </fieldset>
+          </div>
+        <div>
+            I confirm that all the information in this request for quotation is correct: 
+            @Html.CheckBox("ConfirmCheckbox")
+            <br/>
+            I confirm i have read the Terms, Conditions and Guidance for the aLink card scheme: 
+            @Html.CheckBox("TandCCheckbox")
+        </div>
+        <div style="margin-top: 15px;">
+            <input type="button" id="backButton" value="Cancel" 
+                   style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: left"   
+                   onclick=" location.href = '@Url.Action("Index", "Request")    ' "
+                />
+          @*  <input type="button" id="editButton" value="Edit" 
+                   style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: right"   
+                   onclick=" location.href = '@Url.Action("Edit", "Request")    ' "
+                />*@
+            <input type="submit" id="submitButton" value="Submit" 
+                   style="border-radius: 4px; border-style: solid; border-color: #808080; border-width: 1px; float: right"
+                />
+        </div>
+   
+    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#submitButton').hide();
+            //$('#editButton').hide();
+
+            @if (string.IsNullOrEmpty(Model.PhoneNumber))
+            {
+<text>
+    hidePhone();
+</text>
+            }
+
+            @if (Model.Email == null)
+            {
+<text>
+    hideEmail();
+</text>   
+            }
+
+            @if (Model.Employer == null)
+            {
+                <text>
+            HideEmplyer();     
+            </text>
+            }
+            @if (Model.ModeOfTravel3 == "NA")
+            {
+                <text>
+            HideJourney(2);
+            </text>
+            }
+            @if (Model.ModeOfTravel2 == "NA")
+            {
+                <text>
+            HideJourney(1);
+            </text>
+            }
+        });
+
+        $('#TandCCheckbox').click(function() {
+                if ($('#ConfirmCheckbox').is(':checked') && $('#TandCCheckbox').is(':checked')) {
+
+                    $('#submitButton').fadeIn(2000);
+                }
+            }
+        );
+
+        function hideEmail() {
+            $('#emailDiv').css('border-color', '#cef6f5');
+        }
+
+        function hidePhone() {
+            $('#phoneDiv').css('border-color', '#cef6f5');
+        }
+
+        function HideEmplyer() {
+            $('#EmployerDiv').hide();
+            $('#backGroundDiv').css('height', '630px');
+        };
+
+        function HideJourney(id) {
+            if (id != 1) {
+                $('#from3Div').css('border-color', '#cef6f5');
+                $('#to3Div').css('border-color', '#cef6f5');
+                //$('#journey3Div').hide();
+
+            } else {
+                $('#from3Div').css('border-color', '#cef6f5');
+                $('#to3Div').css('border-color', '#cef6f5');
+                $('#from2Div').css('border-color', '#cef6f5');
+                $('#to2Div').css('border-color', '#cef6f5');
+            }
+
+            //if ($('#EmployerDiv').css('display', 'none')) {
+            //    $('#backGroundDiv').css('height', '490px');
+            //} else if ($('#journey3Div').css('display', 'none')&&$('#EmployerDiv').css('display', 'none')) {
+            //    $('#backGroundDiv').css('height', '410px');
+            //} else if ($('#journey3Div').css('display', 'none') && $('#journey2Div').css('display', 'none')) {
+            //    $('#backGroundDiv').css('height', '320px');
+            //} else if(!$('#EmployerDiv').css('display', 'none') && $('#journey3Div').css('display', 'none') && $('#journey2Div').css('display', 'none') ) {
+            //    $('#backGroundDiv').css('height', '390px'); 
+            //}
+
+
+            //$('#EmployerDiv').hide();
+        }
+
+
+    </script>
+}
+</div>

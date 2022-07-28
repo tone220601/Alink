@@ -1,0 +1,31 @@
+﻿
+@model Portal.Models.Confirmed
+@{
+    ViewBag.Title = "Processed";
+}
+
+
+<div style="width: 0; height: 138px;"></div>
+<div style="margin: 0 auto; width:410px; ">
+
+</div>
+
+<div id="backGroundDiv" style="background-color: #CEF6F5; width: 700px; height: 310px; margin:0 auto; margin-top: 20px;">
+    <div style="margin-left: 15px; padding-top: 10px;">
+        <h1 align="center">Confirmation</h1>
+        <div align="center" >
+        <p>Thank you for submitting your aLnk card Request for Quotation. We are now 
+            <br />processing your request. You will receive a Quotation and Application Form for your aLink
+            <br/> card to your home address within 4 working days.
+        </p>
+        <p> <h2>Your reference number is @Html.DisplayFor(model=> model.Reference)</h2></p>
+        <p>For aLink enquiries<br />Phone 028 90 66 66 30 </p>
+            <p>Translink Ticketing Systems Department, 3 Milewater road, Belast, BT3 9BG</p>
+            <p><link href="www.translink.co.uk/alink"/>www.translink.co.uk/alink<br/>
+            <a href="mailto:passoffice@translink.co.uk"> email: pass.office@translink.co.uk</a></p>
+     
+        </div>
+       
+    </div>
+
+</div>

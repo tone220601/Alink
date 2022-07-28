@@ -1,0 +1,191 @@
+﻿html,body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer, nav, section {
+  
+  
+   /* border-style: solid;
+    border-width: 1px;
+    border-color: black;*/
+}
+
+p {
+    font:12px arial,sans-serif;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+.MainPage {
+  background: url("Images/FullHeader.jpg") no-repeat ;
+   margin: 0 auto;
+    width: 800px;
+
+}
+fieldset {
+    border: 0px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+.circle {
+	border-radius: 50%;
+    background: no-repeat 0 0, black;
+	width: 20px;
+	height: 20px; 
+	/* width and height can be anything, as long as they're equal */
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 65px;
+    width: 200px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+    padding-left: 10px;
+}
+
+
+.wrap {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+
+.field_left {
+    clear: both;
+    float: left;
+    padding-right: 5px;
+    padding-top: 5px;
+    text-align: right;
+    width: 20%;
+}
+
+.field_right_Create {
+    float: left;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    width: 70%;
+    margin-bottom: 10px;
+    border-color: #2ab1b0;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 5px;
+}
+
+.field_right_Confirm {
+    float: left;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    width: 70%;
+    margin-bottom: 10px;
+    border-color: #2ab1b0;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 5px;
+}
+
+.field_right input[type="Text"], input[type="datetime"], input[type="number"], input[type="email"],  select {
+    float: left;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    width: 70%;
+    margin-bottom: 10px;
+    border-color: #2ab1b0;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.field_right input[type=date] {
+    float: left;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    width: 20%;
+    margin-bottom: 10px;
+    border-color: #2ab1b0;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+
+.field_right select {
+    float: left;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    width: 18%;
+    margin-bottom: 10px;
+    border-color: #2ab1b0;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/*.field_right input[type="date"] {
+    width: 100px;
+    float: left;
+    margin-bottom: 10px;
+    border-color: #2ab1b0;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+
+}*/
+
+
+#dobDiv span {
+    margin-left: 10px;
+}
+
+#Gender {
+    margin-top: 7px;
+}
+
+#ModesOfTransports1,#ModesOfTransports2, #ModesOfTransports3 {
+    width: 18%;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+    float: left;
+    margin-left: 135px;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}

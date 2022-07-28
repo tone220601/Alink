@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div style="width: 0; height: 138px;"></div>
+<div style="margin: 0 auto; width:410px; ">
+    <h3 >Online Quotation</h3>
+</div>
+
+<div style="height: 160px; margin: 0px auto; width: 420px; margin-top: -10px;  border-top-style: solid; border-top-color: #B2E5FF; border-top-width: 2px; border-bottom-style: solid; border-bottom-color: #B2E5FF; border-bottom-width: 2px;">
+    <div style="margin-left: 15px;">
+        <p>Please complete this online form if you wish to receive a quote for an aLink
+            smartcard.
+        <p>This form should be submitted after reading the terms, conditions and <br />guidance available. </p>
+        <p>Once you have completed this form, Translink will send you a quotation <br/>for your aLink card within 4 working days.</p>
+    </div>
+
+</div>
+<div style="margin: 0px auto; width: 0px; padding: 5px 0 0 280px; ">
+    <input type="button" value="Continue" onclick="location.href='@Url.Action("Create", "Request")'" 
+           style="border-radius: 4px;  
+           border-style: solid; 
+           border-color: #808080; border-width: 1px;" />
+</div>
